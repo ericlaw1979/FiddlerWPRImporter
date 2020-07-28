@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPRImport", "WPRImport.csproj", "{53BE9266-D62E-49F1-BCE8-AD7A37511BB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53BE9266-D62E-49F1-BCE8-AD7A37511BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BE9266-D62E-49F1-BCE8-AD7A37511BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BE9266-D62E-49F1-BCE8-AD7A37511BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BE9266-D62E-49F1-BCE8-AD7A37511BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {821B8803-1223-4160-B513-2D48CE31A33F}
+	EndGlobalSection
+EndGlobal
