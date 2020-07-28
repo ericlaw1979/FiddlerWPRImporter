@@ -12,7 +12,7 @@ namespace WPRImport
     {
         public Session[] ImportSessions(string sFormat, Dictionary<string, object> dictOptions, EventHandler<Fiddler.ProgressCallbackEventArgs> evtProgressNotifications)
         {
-            if ((sFormat != "NetLog JSON")) { Debug.Assert(false); return null; }
+            if ((sFormat != "WPRCapture JSON")) { Debug.Assert(false); return null; }
 
             MemoryStream strmContent = null;
             string sFilename = null;
