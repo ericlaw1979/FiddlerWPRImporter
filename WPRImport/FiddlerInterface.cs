@@ -7,7 +7,7 @@ using Fiddler;
 
 namespace WPRImport
 {
-    [ProfferFormat("WPRCapture JSON", "WebPageReplay Capture (v1.0). See hhttps://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md for more details.")]
+    [ProfferFormat("WPRCapture JSON", "WebPageReplay Capture (v1.0). See https://github.com/catapult-project/catapult/blob/master/web_page_replay_go/README.md for more details.")]
     public class HTTPArchiveFormatImport : ISessionImporter
     {
         public Session[] ImportSessions(string sFormat, Dictionary<string, object> dictOptions, EventHandler<Fiddler.ProgressCallbackEventArgs> evtProgressNotifications)
