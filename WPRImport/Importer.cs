@@ -99,6 +99,7 @@ namespace WPRImport
 
             foreach (Hashtable htURLs in htRequests.Values)
             {
+                // TODO: Figure out whether each htURL key is HTTPS and if so set the protocol of the Session to HTTPS. Today we just assume HTTP.
                 foreach (ArrayList alPair in htURLs.Values)
                 {
                     foreach (Hashtable htPair in alPair)
