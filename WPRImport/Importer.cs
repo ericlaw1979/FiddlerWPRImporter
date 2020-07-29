@@ -47,7 +47,7 @@ namespace WPRImport
                 Session sessFile = Session.BuildFromData(false,
                     new HTTPRequestHeaders(
                         String.Format("/file.json"),
-                        new[] { "Host: IMPORTED", "Date: " + DateTime.UtcNow.ToString() }),
+                        new[] { "Host: failed-import", "Date: " + DateTime.UtcNow.ToString() }),
                     Utilities.emptyByteArray,
                     new HTTPResponseHeaders(200, "File Data", new[] { "Content-Type: application/json; charset=utf-8" }),
                     Encoding.UTF8.GetBytes(JSON.JsonEncode(htFile)),
@@ -99,10 +99,15 @@ namespace WPRImport
 
             foreach (Hashtable htURLs in htRequests.Values)
             {
-                // TODO: Figure out whether each htURL key is HTTPS and if so set the protocol of the Session to HTTPS. Today we just assume HTTP.
-                foreach (ArrayList alPair in htURLs.Values)
+                foreach (DictionaryEntry de in htURLs)
                 {
-                    foreach (Hashtable htPair in alPair)
+                    ArrayList alPairs = de.Value as ArrayList;
+                    string sURL = (de.Key as String);
+                    bool bIsHTTPS = sURL.StartsWith("https:");
+                    // FiddlerApplication.Log.LogFormat("Parsing requests/responses for {0}", sURL);
+
+                    // Each request/response pair instance for this URL
+                    foreach (Hashtable htPair in alPairs)
                     {
                         try
                         {
@@ -111,7 +116,20 @@ namespace WPRImport
 
                             byte[] arrRequest = Convert.FromBase64String(sRequest);
                             byte[] arrResponse = Convert.FromBase64String(sResponse);
+                            // FiddlerApplication.Log.LogString(Utilities.ByteArrayToHexView(arrRequest, 16));
+
                             Session oNewSession = new Session(arrRequest, arrResponse, SessionFlags.ImportedFromOtherTool);
+
+                            // If the capture URL indicates HTTPS, update the Session URL to HTTPS.
+                            // (Request Header bytes only contain the scheme when the request was known to be directed at a proxy)
+                            if (bIsHTTPS && oNewSession.fullUrl != sURL)
+                            {
+                                oNewSession.RequestHeaders.UriScheme = "https";
+                                oNewSession.UNSTABLE_SetBitFlag(SessionFlags.IsHTTPS, true);
+
+                                // The URLs should now exactly match.
+                                Debug.Assert(oNewSession.fullUrl == sURL);
+                            }
                             _listSessions.Add(oNewSession);
                         }
                         catch (Exception eX)
